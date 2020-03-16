@@ -46,8 +46,6 @@ class GroupInfoList extends Component {
   }
 }
 
-// export default GroupInfoList;
-
 // props 로 넣어줄 스토어 상태값
 const mapStateToProps = state => ({
   list: state.userlist.list

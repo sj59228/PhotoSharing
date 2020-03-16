@@ -159,8 +159,6 @@ class Relations extends Component {
         {/* PAGE CONTENT
 		============================================= */}
         <div id="page" className="page">
-          {/* HEADER
-			============================================= */}
           <MainNav />
         </div>{" "}
         <br />
@@ -229,8 +227,6 @@ class Relations extends Component {
     );
   }
 }
-
-// export default Relations;
 
 // props 로 넣어줄 스토어 상태값
 const mapStateToProps = state => ({
