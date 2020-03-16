@@ -69,27 +69,18 @@ class Home extends Component {
         {/* PAGE CONTENT
 		============================================= */}
         <div id="page" className="page">
-          {/* HEADER
-			============================================= */}
           <MainNav />
           {/* <FloatingButton /> */}
         </div>{" "}
-        {/* End row */}
-        {/* HERO-5
-			============================================= */}
         <section className="bg-fixed hero-section division">
           <div className="container offset-top-8">
-            {/* HERO CONTENT */}
             <div className="row d-flex align-items-center offset-0_5 offset-left-0_R">
-              {/* HERO TEXT */}
               <div className="col-md-8 p-right-0 p-left-0 offset-top-7 animated fadeIn visible">
                 <div>
-                  {/* Title */}
                   <h2 className="h2-sm">
                     지나갔지만 추억하면 <br /> 애틋한 기억들 <br /> 소중한
                     사람과 함께 기록해 보아요.
                   </h2>
-                  {/* Text */}
                   <p className="p-3xl p-font-MyriadProRegular p-top-20">
                     정말 소중한 기억들. 우리끼리만 공유하고 싶은 추억들.
                     <br />
@@ -107,31 +98,21 @@ class Home extends Component {
                   </p>
                 </div>
               </div>{" "}
-              {/* END HERO TEXT */}
-              {/* HERO IMAGE */}
               <div className="col-md-4 p-left-10 hero-img m-bottom-30">
                 <img
                   className="img-fluid p-bottom-10 offset-1_5 offset-left-0_R CompanyImage gifSize animated fadeIn visible"
                   src={require("./images/animatedcamera.gif")}
-                  alt="hero-image"
+                  alt="Company_Image"
                 />
               </div>
             </div>{" "}
-            {/* END HERO CONTENT */}
           </div>{" "}
-          {/* End container */}
         </section>{" "}
         <br />
-        {/* END HERO-5 */}
-        {/* END BRANDS-1 */}
         <br />
         <br />
         <br />
         <br />
-        {/* END PAGE CONTENT */}
-        {/* EXTERNAL SCRIPTS
-		============================================= */}
-        {/* <script src={require("./js/retina.js")}></script>	 */}
       </div>
     );
   }

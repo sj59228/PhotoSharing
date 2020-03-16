@@ -60,7 +60,7 @@ class NAV extends Component {
   handleLinkClick(val) {
     this.setState({ menuOpen: false });
 
-    if (val === "Introduce Members") {
+    if (val === "Introduce Company") {
       window.location.href = "#/company";
       window.scrollTo(0, 0);
     } else if (val === "Directoty") {
@@ -93,7 +93,7 @@ class NAV extends Component {
         color: "black"
       }
     };
-    const menu = ["Introduce Members", "Directoty", "Upload"];
+    const menu = ["Introduce Company", "Directoty", "Upload"];
     const menuItems = menu.map((val, index) => {
       return (
         <div>
@@ -273,7 +273,6 @@ class MenuButton extends Component {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        // cursor: 'pointer',
         padding: "4px"
       },
       line: {

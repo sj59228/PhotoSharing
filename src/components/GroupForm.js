@@ -1,20 +1,24 @@
 // file: src/components/PhoneForm.js
 import React, { Component } from "react";
-import { storage } from "../firebase";
 import firebase from "firebase";
-window.n1 = 0;
-window.n2 = 0;
+
 class GroupForm extends Component {
   state = {
     name: "",
     password: ""
   };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
+
   handleSubmit = e => {
+    if (this.state.name === "" || this.state.password === "") {
+      alert("입력창을 모두 입력해주세요!");
+      return;
+    }
     // 페이지 리로딩 방지
     e.preventDefault();
     // 상태값을 onCreate 를 통하여 부모에게 전달

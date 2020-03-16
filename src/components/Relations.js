@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import MainNav from "./mainNav";
 import { storage } from "../firebase";
 import firebase from "firebase";
+import { connect } from "react-redux";
+import { changelist } from "../store/modules/userlist";
 
 class Relations extends Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class Relations extends Component {
 
     this.state = {
       groupName: "",
+      passwd: "",
       image: null,
       url: "gs://photosharing-7553c.appspot.com",
       progress: 0
@@ -22,49 +25,77 @@ class Relations extends Component {
       this.setState(() => ({ image }));
     }
   };
-  handleChange2 = e => {
+  handleChangeGroupName = e => {
     this.setState({
       groupName: e.target.value
     });
   };
-  handleUpload = () => {
-    const { image } = this.state;
-    const uploadTask = storage.ref(`images2/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        // progrss function ....
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        this.setState({ progress });
-      },
-      error => {
-        // error function ....
-        console.log(error);
-      },
-      () => {
-        // complete function ....
-        storage
-          .ref("images2")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            console.log(url);
-            this.setState({ url });
-          });
-      }
-    );
+
+  handleChangeGroupPasswd = e => {
+    this.setState({
+      passwd: e.target.value
+    });
   };
 
+  handleUpload = () => {
+    const { list } = this.props;
+
+    var flag = false;
+    // alert(this.state.groupName);
+    for (var value of list) {
+      if (value.name === this.state.groupName) {
+        if (value.password !== this.state.passwd) {
+          alert("비밀번호가 틀립니다..\n다시 입력해주세요..");
+          return;
+        }
+        alert(value.name + " 그룹에 추가 되었습니다.");
+        flag = true;
+        break;
+      }
+    }
+    if (flag === false) {
+      alert("해당 그룹을 찾지 못했습니다.\n그룹명을 다시 적어주세요.");
+      return;
+    }
+    // const { image } = this.state;
+    // const uploadTask = storage.ref(`images2/${image.name}`).put(image);
+    // uploadTask.on(
+    //   "state_changed",
+    //   snapshot => {
+    //     // progrss function ....
+    //     const progress = Math.round(
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     );
+    //     this.setState({ progress });
+    //   },
+    //   error => {
+    //     // error function ....
+    //     console.log(error);
+    //   },
+    //   () => {
+    //     // complete function ....
+    //     storage
+    //       .ref("images2")
+    //       .child(image.name)
+    //       .getDownloadURL()
+    //       .then(url => {
+    //         console.log(url);
+    //         this.setState({ url });
+    //       });
+    //   }
+    // );
+  };
+
+  componentDidMount() {}
+
   render() {
-    const style = {
-      height: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    };
+    // const style = {
+    //   height: "100vh",
+    //   display: "flex",
+    //   flexDirection: "column",
+    //   alignItems: "center",
+    //   justifyContent: "center"
+    // };
     var rootRef = firebase.database().ref();
     rootRef
       .child("users")
@@ -104,8 +135,6 @@ class Relations extends Component {
         })
         i++;
      }
-  
-    
     if(booliden == true){
       database.ref('users/').child('dir').push("dirname" : dirname, "passwd": 1234)  ;
     }*/
@@ -134,7 +163,6 @@ class Relations extends Component {
 			============================================= */}
           <MainNav />
         </div>{" "}
-        {/* End row */}
         <br />
         <br />
         <br />
@@ -143,21 +171,28 @@ class Relations extends Component {
         <br />
         <br />
         <section className="division">
-          <div className="container p-left-0 align-items-center offset-top-8">
-            <div className="d-flex align-items-center img-fluid offset-1">
-              {/* <progress value={this.state.progress} max="100" /> */}
+          <div className="container p-left-0 align-items-center offset-top-8 offset-1">
+            <div className="d-flex align-items-center img-fluid offset-1 p-left-50 ">
               <br />
-              <h1 className="p-font-MiSaeng m-bottom-0">
+              <h1 className="p-font-MiSaeng m-bottom-0 ">
                 사진을 올려주세요! &nbsp;
                 <input
                   type="group"
                   name="group"
-                  // value={this.state.groupName}
-                  onChange={this.handleChange2}
+                  value={this.state.groupName}
+                  onChange={this.handleChangeGroupName}
                   placeholder="그룹명"
                   size="7"
                 />
-                {/* {this.state.groupName} */}
+                &nbsp;&nbsp;
+                <input
+                  type="group"
+                  name="group"
+                  value={this.state.passwd}
+                  onChange={this.handleChangeGroupPasswd}
+                  placeholder="비밀번호"
+                  size="7"
+                />
               </h1>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <h2 className="p-font-MiSaeng m-bottom-0">
@@ -169,7 +204,6 @@ class Relations extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <img
                   src={this.state.url || "http://via.placeholder.com/400x300"}
-                  // src={require("./images/animatedcamera.gif")}
                   alt="업로드 하기 전입니당"
                   width="400"
                 />
@@ -186,17 +220,27 @@ class Relations extends Component {
         </section>
         <br />
         <br />
-        {/* END BRANDS-1 */}
         <br />
         <br />
-        {/* END BRANDS-1 */}
         <br />
         <br />
-        <div className="bottom">{/* <Footers /> */}</div>{" "}
-        {/* END PAGE CONTENT */}
+        <div className="bottom"></div>{" "}
       </div>
     );
   }
 }
 
-export default Relations;
+// export default Relations;
+
+// props 로 넣어줄 스토어 상태값
+const mapStateToProps = state => ({
+  list: state.userlist.list
+});
+
+// props 로 넣어줄 액션 생성함수
+const mapDispatchToProps = dispatch => ({
+  changelist: list => dispatch(changelist(list))
+});
+
+// 컴포넌트에 리덕스 스토어를 연동해줄 때에는 connect 함수 사용
+export default connect(mapStateToProps, mapDispatchToProps)(Relations);

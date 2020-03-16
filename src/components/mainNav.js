@@ -3,22 +3,6 @@ import { Link, Events, animateScroll as scroll, scroller } from "react-scroll";
 import { Link as Link2 } from "react-router-dom";
 import NAV from "./navbar";
 
-const propTypes = {
-  Text1: "Services.",
-  Text2: "Company.",
-  Text3: "Press.",
-  Text4: "Relations.",
-  Text5: "Contact."
-};
-
-const defaultProps = {
-  Text1: "Services.",
-  Text2: "Company.",
-  Text3: "Press.",
-  Text4: "Relations.",
-  Text5: "Contact."
-};
-
 class MainNav extends Component {
   constructor(props) {
     super(props);
@@ -93,12 +77,9 @@ class MainNav extends Component {
                 </Link>
               </Link2>
             </Link>
-            {/* <a href="/" className="navbar-brand logo-black">""</a> */}
-            {/* Responsive Menu Button */}
             <button className="navbar-toggler">
               <NAV />
             </button>
-            {/* Navigation Menu */}
             <div
               id="navbarSupportedContent"
               className="collapse navbar-collapse"
@@ -175,54 +156,11 @@ class MainNav extends Component {
                 </li>
               </ul>
             </div>{" "}
-            {/* End Navigation Menu */}
           </div>{" "}
-          {/* End container */}
         </nav>{" "}
-        {/* End navbar  */}
       </header>
     );
   }
 }
-
-MainNav.propTypes = propTypes;
-MainNav.defaultProps = defaultProps;
-
-const mapStateToProps = state => {
-  console.log(state.lang.text);
-  var text1;
-  var text2;
-  var text3;
-  var text4;
-  var text5;
-
-  switch (state.lang.text) {
-    case "KOR":
-      text1 = "제품소개.";
-      text2 = "회사소개.";
-      text3 = "관련기사.";
-      text4 = "협력사.";
-      text5 = "연락.";
-
-      break;
-
-    case "ENG":
-      text1 = "Services.";
-      text2 = "Company.";
-      text3 = "Press.";
-      text4 = "Relations.";
-      text5 = "Contact.";
-
-      break;
-  }
-
-  return {
-    Text1: text1,
-    Text2: text2,
-    Text3: text3,
-    Text4: text4,
-    Text5: text5
-  };
-};
 
 export default MainNav;

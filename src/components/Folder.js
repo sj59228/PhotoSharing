@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import GroupInfo from "./GroupInfo";
-import styled, { keyframes } from "styled-components";
 
 class Folder extends Component {
   render() {

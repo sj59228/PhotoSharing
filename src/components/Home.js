@@ -67,18 +67,10 @@ class Home extends Component {
         <link href={require("./css/style.css")} rel="stylesheet" />
         {/* RESPONSIVE CSS */}
         <link href={require("./css/responsive.css")} rel="stylesheet" />
-        {/* PAGE CONTENT
-		============================================= */}
+        {/* //////////////////////////////////////////////////////////////// */}
         <div id="page" className="page">
-          {/* HEADER
-			============================================= */}
           <MainNav />
-          {/* HERO-5\
-      ============================================= */}
           <hr id="test" className="hr-line offset-10 offset-top-0 m-bottom-0" />
-          {/* END HERO-5 */}
-          {/* CONTENT-7
-      ============================================= */}
           <section className="division">
             <div className="container p-left-0 ">
               <div className="d-flex align-items-center">
@@ -86,13 +78,12 @@ class Home extends Component {
                   <img
                     className="img-fluid offset-0_5"
                     src={require("./images/homeImage/ourtime.png")}
-                    alt="hero-image"
+                    alt="Company_Image"
                     width={1300}
                   />
                 </div>
               </div>{" "}
             </div>{" "}
-            {/* End container */}
             <div className="container p-left-0 ">
               <h3 className="h3-xs animated fadeInUp visible hero-img">
                 <br />
@@ -103,24 +94,13 @@ class Home extends Component {
               </h3>
             </div>
           </section>{" "}
-          {/* END CONTENT-7 */}
-          {/* </div>	 */}
-          {/* MORE APPS
-			============================================= */}
         </div>{" "}
         <br />
         <br />
         <br />
         <br />
         <br />
-        {/* End container */}
-        {/* END MORE APPS */}
-        {/* FOOTER-2
-      ============================================= */}
-        <div className="bottom">{/* <Footers /> */}</div>
-        {/* END PAGE CONTENT */}
-        {/* EXTERNAL SCRIPTS
-		============================================= */}
+        <div className="bottom"></div>
       </div>
     );
   }

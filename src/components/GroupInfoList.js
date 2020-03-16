@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import GroupInfo from "./GroupInfo";
+import { connect } from "react-redux";
+import { changelist } from "../store/modules/userlist";
 
 class GroupInfoList extends Component {
   static defaultProps = {
@@ -8,30 +10,53 @@ class GroupInfoList extends Component {
     onUpdate: () => console.warn("onUpdate not defined")
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     return nextProps.data !== this.props.data;
   }
+
+  setRedux = input => {
+    const { changelist } = this.props;
+    changelist(input);
+  };
 
   render() {
     const style = {
       margin: "20px"
     };
 
-    console.log("render GroupInfoList");
+    // list : redux용 리스트
+    // console.log("render GroupInfoList");
     const { data, onRemove, onUpdate } = this.props;
-    const list = data.map(info => (
+    // console.log(data);
+    const printList = data.map(info => (
       <div style={style}>
-      <GroupInfo
-        key={info.id}
-        info={info}
-        onRemove={onRemove}
-        onUpdate={onUpdate}
-      />
+        <GroupInfo
+          key={info.id}
+          info={info}
+          onRemove={onRemove}
+          onUpdate={onUpdate}
+        />
       </div>
     ));
 
-    return <div>{list}</div>;
+    // this.setRedux(data);
+    this.setRedux(data);
+
+    return <div>{printList}</div>;
   }
 }
 
-export default GroupInfoList;
+// export default GroupInfoList;
+
+// props 로 넣어줄 스토어 상태값
+const mapStateToProps = state => ({
+  list: state.userlist.list
+});
+
+// props 로 넣어줄 액션 생성함수
+const mapDispatchToProps = dispatch => ({
+  changelist: list => dispatch(changelist(list))
+});
+
+// 컴포넌트에 리덕스 스토어를 연동해줄 때에는 connect 함수 사용
+export default connect(mapStateToProps, mapDispatchToProps)(GroupInfoList);

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-import styled, { keyframes } from "styled-components";
-import { storage } from "../firebase";
+import styled from "styled-components";
 import firebase from "firebase";
 import { Link as Link2 } from "react-router-dom";
 
@@ -98,6 +97,12 @@ class GroupInfo extends Component {
       padding: "8px",
       margin: "8px"
     };
+    const styleEdit = {
+      padding: "5px",
+      marginLeft: "5px",
+      marginTop: "2px",
+      marginBottom: "0px"
+    };
     var database = firebase.database();
 
     const { editing } = this.state;
@@ -107,7 +112,7 @@ class GroupInfo extends Component {
       return (
         <Container>
           <div>
-            <div style={style}>
+            <div style={styleEdit}>
               <input
                 value={this.state.name}
                 name="name"
@@ -115,7 +120,7 @@ class GroupInfo extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div>
+            <div style={styleEdit}>
               <input
                 type="password"
                 value={this.state.password}
@@ -124,12 +129,14 @@ class GroupInfo extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="btn" onClick={this.handleToggleEdit}>
-              적용
-            </div>
-            <div className="btn" onClick={this.handleRemove}>
-              삭제
-            </div>
+            <h4>
+              <div className="btn" onClick={this.handleToggleEdit}>
+                적용
+              </div>
+              <div className="btn" onClick={this.handleRemove}>
+                삭제
+              </div>
+            </h4>
           </div>
         </Container>
       );
@@ -138,9 +145,9 @@ class GroupInfo extends Component {
     // 일반모드
     const { name, password } = this.props.info;
 
-    var database = firebase.database();
-    var dirname = name; //이름
-    var passwd = password;
+    // var database = firebase.database();
+    // var dirname = name; //이름
+    // var passwd = password;
     var count;
 
     firebase
